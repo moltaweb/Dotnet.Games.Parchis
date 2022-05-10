@@ -1,0 +1,364 @@
+﻿<Window x:Class="Parchis.GameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Parchis" 
+        xmlns:controls="clr-namespace:Parchis.Controls" xmlns:system="clr-namespace:System;assembly=System.Runtime"
+        mc:Ignorable="d"
+        Title="Parchis Game" Height="700" Width="1000">
+
+    <Window.Resources>
+        <GridLength x:Key="cellSize">35</GridLength>
+        <GridLength x:Key="cellSizeLarge">70</GridLength>
+        <system:Double x:Key="cellHeight">35</system:Double>
+        <system:Double x:Key="cellHeightDouble">70</system:Double>
+        <PointCollection x:Key="diagonalDesc">
+            <Point X="0" Y="0"></Point>
+            <Point X="{StaticResource cellHeightDouble}" Y="{StaticResource cellHeightDouble}"></Point>
+        </PointCollection>
+        <PointCollection x:Key="diagonalAsc">
+            <Point X="0" Y="{StaticResource cellHeightDouble}"></Point>
+            <Point X="{StaticResource cellHeightDouble}" Y="0"></Point>
+        </PointCollection>
+        <PointCollection x:Key="triangleGreenOne">
+            <Point X="{StaticResource cellHeight}" Y="{StaticResource cellHeight}"></Point>
+            <Point X="{StaticResource cellHeight}" Y="{StaticResource cellHeightDouble}"></Point>
+            <Point X="{StaticResource cellHeightDouble}" Y="{StaticResource cellHeightDouble}"></Point>
+        </PointCollection>
+        <PointCollection x:Key="triangleGreenTwo">
+            <Point X="{StaticResource cellHeight}" Y="{StaticResource cellHeight}"></Point>
+            <Point X="{StaticResource cellHeight}" Y="0"></Point>
+            <Point X="{StaticResource cellHeightDouble}" Y="0"></Point>
+        </PointCollection>
+        <PointCollection x:Key="triangleRedOne">
+            <Point X="{StaticResource cellHeight}" Y="{StaticResource cellHeight}"></Point>
+            <Point X="{StaticResource cellHeightDouble}" Y="{StaticResource cellHeight}"></Point>
+            <Point X="{StaticResource cellHeightDouble}" Y="{StaticResource cellHeightDouble}"></Point>
+        </PointCollection>
+        <PointCollection x:Key="triangleRedTwo">
+            <Point X="0" Y="{StaticResource cellHeight}"></Point>
+            <Point X="0" Y="{StaticResource cellHeightDouble}"></Point>
+            <Point X="{StaticResource cellHeight}" Y="{StaticResource cellHeight}"></Point>
+        </PointCollection>
+        <PointCollection x:Key="triangleBlueOne">
+            <Point X="0" Y="0"></Point>
+            <Point X="{StaticResource cellHeight}" Y="{StaticResource cellHeight}"></Point>
+            <Point X="{StaticResource cellHeight}" Y="0"></Point>
+        </PointCollection>
+        <PointCollection x:Key="triangleBlueTwo">
+            <Point X="{StaticResource cellHeight}" Y="{StaticResource cellHeight}"></Point>
+            <Point X="{StaticResource cellHeight}" Y="{StaticResource cellHeightDouble}"></Point>
+            <Point X="0" Y="{StaticResource cellHeightDouble}"></Point>
+        </PointCollection>
+        <PointCollection x:Key="triangleYellowOne">
+            <Point X="{StaticResource cellHeightDouble}" Y="{StaticResource cellHeight}"></Point>
+            <Point X="{StaticResource cellHeight}" Y="{StaticResource cellHeight}"></Point>
+            <Point X="{StaticResource cellHeightDouble}" Y="0"></Point>
+        </PointCollection>
+        <PointCollection x:Key="triangleYellowTwo">
+            <Point X="0" Y="0"></Point>
+            <Point X="{StaticResource cellHeight}" Y="{StaticResource cellHeight}"></Point>
+            <Point X="0" Y="{StaticResource cellHeight}"></Point>
+        </PointCollection>
+
+        <Style x:Key="chipTemplate" TargetType="Button">
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <!--<Setter Property="Foreground" Value="Transparent" />-->
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="50" />
+                </Style>
+            </Style.Resources>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid ShowGridLines="False" Margin="50 0 0 0" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{StaticResource cellSize}" />
+                <RowDefinition Height="{StaticResource cellSize}" />
+                <RowDefinition Height="{StaticResource cellSize}" />
+                <RowDefinition Height="{StaticResource cellSize}" />
+                <RowDefinition Height="{StaticResource cellSize}" />
+                <RowDefinition Height="{StaticResource cellSize}" />
+                <RowDefinition Height="{StaticResource cellSize}" />
+                <RowDefinition Height="{StaticResource cellSizeLarge}" />
+                <RowDefinition Height="{StaticResource cellSizeLarge}" />
+                <RowDefinition Height="{StaticResource cellSizeLarge}" />
+                <RowDefinition Height="{StaticResource cellSize}" />
+                <RowDefinition Height="{StaticResource cellSize}" />
+                <RowDefinition Height="{StaticResource cellSize}" />
+                <RowDefinition Height="{StaticResource cellSize}" />
+                <RowDefinition Height="{StaticResource cellSize}" />
+                <RowDefinition Height="{StaticResource cellSize}" />
+                <RowDefinition Height="{StaticResource cellSize}" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{StaticResource cellSize}" />
+                <ColumnDefinition Width="{StaticResource cellSize}" />
+                <ColumnDefinition Width="{StaticResource cellSize}" />
+                <ColumnDefinition Width="{StaticResource cellSize}" />
+                <ColumnDefinition Width="{StaticResource cellSize}" />
+                <ColumnDefinition Width="{StaticResource cellSize}" />
+                <ColumnDefinition Width="{StaticResource cellSize}" />
+                <ColumnDefinition Width="{StaticResource cellSizeLarge}" />
+                <ColumnDefinition Width="{StaticResource cellSizeLarge}" />
+                <ColumnDefinition Width="{StaticResource cellSizeLarge}" />
+                <ColumnDefinition Width="{StaticResource cellSize}" />
+                <ColumnDefinition Width="{StaticResource cellSize}" />
+                <ColumnDefinition Width="{StaticResource cellSize}" />
+                <ColumnDefinition Width="{StaticResource cellSize}" />
+                <ColumnDefinition Width="{StaticResource cellSize}" />
+                <ColumnDefinition Width="{StaticResource cellSize}" />
+                <ColumnDefinition Width="{StaticResource cellSize}" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Red Home -->
+            <controls:PlayerHomeControl Grid.Row="0" Grid.Column="0" 
+                                 Grid.RowSpan="7" Grid.ColumnSpan="7"
+                                 Background="Red" />
+            <StackPanel x:Name="homeRed" Grid.Row="3" Grid.Column="3" />
+
+            <!-- Red Area -->
+            <controls:CellControl x:Name="boardCell35" Grid.Row="0" Grid.Column="7" />
+            <controls:CellControl x:Name="boardCell34" Grid.Row="0" Grid.Column="8" Background="Red"/>
+            <controls:CellControl x:Name="boardCell33" Grid.Row="0" Grid.Column="9"/>
+
+            <controls:CellControl x:Name="boardCell36" Grid.Row="1" Grid.Column="7"/>
+            <controls:CellControl x:Name="boardCellRed1" Grid.Row="1" Grid.Column="8" Background="Red"/>
+            <controls:CellControl x:Name="boardCell32" Grid.Row="1" Grid.Column="9"/>
+
+            <controls:CellControl x:Name="boardCell37" Grid.Row="2" Grid.Column="7"/>
+            <controls:CellControl x:Name="boardCellRed2" Grid.Row="2" Grid.Column="8" Background="Red"/>
+            <controls:CellControl x:Name="boardCell31" Grid.Row="2" Grid.Column="9"/>
+
+            <controls:CellControl x:Name="boardCell38" Grid.Row="3" Grid.Column="7"/>
+            <controls:CellControl x:Name="boardCellRed3" Grid.Row="3" Grid.Column="8" Background="Red"/>
+            <controls:CellControl x:Name="boardCell30" Grid.Row="3" Grid.Column="9"/>
+
+            <controls:CellControl x:Name="boardCell39" Grid.Row="4" Grid.Column="7" Background="Red"/>
+            <controls:CellControl x:Name="boardCellRed4" Grid.Row="4" Grid.Column="8" Background="Red"/>
+            <controls:CellControl x:Name="boardCell29" Grid.Row="4" Grid.Column="9"/>
+
+            <controls:CellControl x:Name="boardCell40" Grid.Row="5" Grid.Column="7"/>
+            <controls:CellControl x:Name="boardCellRed5" Grid.Row="5" Grid.Column="8" Background="Red"/>
+            <controls:CellControl x:Name="boardCell28" Grid.Row="5" Grid.Column="9"/>
+
+            <controls:CellControl x:Name="boardCell41" Grid.Row="6" Grid.Column="7"/>
+            <controls:CellControl x:Name="boardCellRed6" Grid.Row="6" Grid.Column="8" Background="Red"/>
+            <controls:CellControl x:Name="boardCell27" Grid.Row="6" Grid.Column="9"/>
+
+            <!-- Red Finish -->
+            <controls:CellControl x:Name="boardCellRed7" Grid.Row="7" Grid.Column="8" VerticalAlignment="Top" Background="Red" Height="{StaticResource cellHeight}"/>
+            <controls:CellControl x:Name="boardCellRed8" Grid.Row="7" Grid.Column="8" VerticalAlignment="Bottom" Background="Red" Height="{StaticResource cellHeight}"/>
+
+            <!-- Red/Green Cross -->
+            <Polygon Points="{StaticResource diagonalDesc}" Stroke="Black" Fill="Transparent" Grid.Row="7" Grid.Column="7"/>
+            <Polygon Points="{StaticResource triangleGreenOne}" Stroke="Green" Fill="Green" Grid.Row="7" Grid.Column="7"/>
+            <Polygon Points="{StaticResource triangleRedOne}" Stroke="Red" Fill="Red" Grid.Row="7" Grid.Column="7"/>
+            <controls:CellControl x:Name="boardCell42" Grid.Row="7" Grid.Column="7" VerticalAlignment="Top" BorderThickness="0"/>
+            <controls:CellControl x:Name="boardCell43" Grid.Row="7" Grid.Column="7" VerticalAlignment="Bottom" BorderThickness="0"/>
+
+            <!-- Green Home -->
+            <controls:PlayerHomeControl Grid.Row="10" Grid.Column="0" 
+                                 Grid.RowSpan="7" Grid.ColumnSpan="7"
+                                 Background="Green" />
+            <StackPanel x:Name="homeGreen" Grid.Row="13" Grid.Column="3" />
+
+            <!-- Green Area -->
+            <controls:CellControl x:Name="boardCell50" Grid.Row="7" Grid.Column="0"/>
+            <controls:CellControl x:Name="boardCell51" Grid.Row="8" Grid.Column="0" Background="Green"/>
+            <controls:CellControl x:Name="boardCell52" Grid.Row="9" Grid.Column="0"/>
+
+            <controls:CellControl x:Name="boardCell49" Grid.Row="7" Grid.Column="1"/>
+            <controls:CellControl x:Name="boardCellGreen1" Grid.Row="8" Grid.Column="1" Background="Green"/>
+            <controls:CellControl x:Name="boardCell53" Grid.Row="9" Grid.Column="1"/>
+
+            <controls:CellControl x:Name="boardCell48" Grid.Row="7" Grid.Column="2"/>
+            <controls:CellControl x:Name="boardCellGreen2" Grid.Row="8" Grid.Column="2" Background="Green"/>
+            <controls:CellControl x:Name="boardCell54" Grid.Row="9" Grid.Column="2"/>
+
+            <controls:CellControl x:Name="boardCell47" Grid.Row="7" Grid.Column="3"/>
+            <controls:CellControl x:Name="boardCellGreen3" Grid.Row="8" Grid.Column="3" Background="Green"/>
+            <controls:CellControl x:Name="boardCell55" Grid.Row="9" Grid.Column="3"/>
+
+            <controls:CellControl x:Name="boardCell46" Grid.Row="7" Grid.Column="4"/>
+            <controls:CellControl x:Name="boardCellGreen4" Grid.Row="8" Grid.Column="4" Background="Green"/>
+            <controls:CellControl x:Name="boardCell56" Grid.Row="9" Grid.Column="4" Background="Green"/>
+
+            <controls:CellControl x:Name="boardCell45" Grid.Row="7" Grid.Column="5"/>
+            <controls:CellControl x:Name="boardCellGreen5" Grid.Row="8" Grid.Column="5" Background="Green"/>
+            <controls:CellControl x:Name="boardCell57" Grid.Row="9" Grid.Column="5"/>
+
+            <controls:CellControl x:Name="boardCell44" Grid.Row="7" Grid.Column="6"/>
+            <controls:CellControl x:Name="boardCellGreen6" Grid.Row="8" Grid.Column="6" Background="Green"/>
+            <controls:CellControl x:Name="boardCell58" Grid.Row="9" Grid.Column="6"/>
+
+            <!-- Green Finish -->
+            <controls:CellControl x:Name="boardCellGreen7" Grid.Row="8" Grid.Column="7" HorizontalAlignment="Left" Background="Green" Width="{StaticResource cellHeight}"/>
+            <controls:CellControl x:Name="boardCellGreen8" Grid.Row="8" Grid.Column="7" HorizontalAlignment="Right" Background="Green" Width="{StaticResource cellHeight}"/>
+
+            <!-- Green/Yellow Cross -->
+
+            <Polygon Points="{StaticResource triangleGreenTwo}" Stroke="Green" Fill="Green" Grid.Row="9" Grid.Column="7"/>
+            <Polygon Points="{StaticResource triangleYellowOne}" Stroke="Yellow" Fill="Yellow" Grid.Row="9" Grid.Column="7"/>
+            <Polygon Points="{StaticResource diagonalAsc}" Stroke="Black" Fill="Transparent" Grid.Row="9" Grid.Column="7"/>
+            <controls:CellControl x:Name="boardCell59" Grid.Row="9" Grid.Column="7" VerticalAlignment="Top" BorderThickness="0"/>
+            <controls:CellControl x:Name="boardCell60" Grid.Row="9" Grid.Column="7" VerticalAlignment="Bottom" BorderThickness="0"/>
+
+            <!-- Yellow Home -->
+            <controls:PlayerHomeControl Grid.Row="10" Grid.Column="10" 
+                                 Grid.RowSpan="7" Grid.ColumnSpan="7"
+                                 Background="Yellow" />
+            <StackPanel x:Name="homeYellow" Grid.Row="13" Grid.Column="13"/>
+
+            <!-- Yellow Area -->
+            <controls:CellControl x:Name="boardCell61" Grid.Row="10" Grid.Column="7"/>
+            <controls:CellControl x:Name="boardCellYellow6" Grid.Row="10" Grid.Column="8" Background="Yellow"/>
+            <controls:CellControl x:Name="boardCell7" Grid.Row="10" Grid.Column="9"/>
+
+            <controls:CellControl x:Name="boardCell62" Grid.Row="11" Grid.Column="7"/>
+            <controls:CellControl x:Name="boardCellYellow5" Grid.Row="11" Grid.Column="8" Background="Yellow"/>
+            <controls:CellControl x:Name="boardCell6" Grid.Row="11" Grid.Column="9"/>
+
+            <controls:CellControl x:Name="boardCell63" Grid.Row="12" Grid.Column="7"/>
+            <controls:CellControl x:Name="boardCellYellow4" Grid.Row="12" Grid.Column="8" Background="Yellow"/>
+            <controls:CellControl x:Name="boardCell5" Grid.Row="12" Grid.Column="9" Background="Yellow"/>
+
+            <controls:CellControl x:Name="boardCell64" Grid.Row="13" Grid.Column="7"/>
+            <controls:CellControl x:Name="boardCellYellow3" Grid.Row="13" Grid.Column="8" Background="Yellow"/>
+            <controls:CellControl x:Name="boardCell4" Grid.Row="13" Grid.Column="9"/>
+
+            <controls:CellControl x:Name="boardCell65" Grid.Row="14" Grid.Column="7"/>
+            <controls:CellControl x:Name="boardCellYellow2" Grid.Row="14" Grid.Column="8" Background="Yellow"/>
+            <controls:CellControl x:Name="boardCell3" Grid.Row="14" Grid.Column="9"/>
+
+            <controls:CellControl x:Name="boardCell66" Grid.Row="15" Grid.Column="7"/>
+            <controls:CellControl x:Name="boardCellYellow1" Grid.Row="15" Grid.Column="8" Background="Yellow"/>
+            <controls:CellControl x:Name="boardCell2" Grid.Row="15" Grid.Column="9"/>
+
+            <controls:CellControl x:Name="boardCell67" Grid.Row="16" Grid.Column="7"/>
+            <controls:CellControl x:Name="boardCell68" Grid.Row="16" Grid.Column="8" Background="Yellow"/>
+            <controls:CellControl x:Name="boardCell1" Grid.Row="16" Grid.Column="9"/>
+
+            <!-- Yellow Finish -->
+            <controls:CellControl x:Name="boardCellYellow7" Grid.Row="9" Grid.Column="8" VerticalAlignment="Bottom" Background="Yellow" Height="{StaticResource cellHeight}"/>
+            <controls:CellControl x:Name="boardCellYellow8" Grid.Row="9" Grid.Column="8" VerticalAlignment="Top" Background="Yellow" Height="{StaticResource cellHeight}"/>
+
+            <!-- Yellow/Blue Cross -->
+
+            <Polygon Points="{StaticResource triangleBlueOne}" Stroke="Blue" Fill="Blue" Grid.Row="9" Grid.Column="9"/>
+            <Polygon Points="{StaticResource triangleYellowTwo}" Stroke="Yellow" Fill="Yellow" Grid.Row="9" Grid.Column="9"/>
+            <Polygon Points="{StaticResource diagonalDesc}" Stroke="Black" Fill="Transparent" Grid.Row="9" Grid.Column="9"/>
+            <controls:CellControl x:Name="boardCell8" Grid.Row="9" Grid.Column="9" VerticalAlignment="Bottom" BorderThickness="0"/>
+            <controls:CellControl x:Name="boardCell9" Grid.Row="9" Grid.Column="9" VerticalAlignment="Top" BorderThickness="0"/>
+
+            <!-- Blue Home -->
+            <controls:PlayerHomeControl Grid.Row="0" Grid.Column="10" 
+                                 Grid.RowSpan="7" Grid.ColumnSpan="7"
+                                 Background="Blue" />
+            <StackPanel x:Name="homeBlue" Grid.Row="3" Grid.Column="13"/>
+
+            <!-- Blue Area -->
+            <controls:CellControl x:Name="boardCell24" Grid.Row="7" Grid.Column="10"/>
+            <controls:CellControl x:Name="boardCellBlue6" Grid.Row="8" Grid.Column="10" Background="Blue"/>
+            <controls:CellControl x:Name="boardCell10" Grid.Row="9" Grid.Column="10"/>
+
+            <controls:CellControl x:Name="boardCell23" Grid.Row="7" Grid.Column="11"/>
+            <controls:CellControl x:Name="boardCellBlue5" Grid.Row="8" Grid.Column="11" Background="Blue"/>
+            <controls:CellControl x:Name="boardCell11" Grid.Row="9" Grid.Column="11"/>
+
+            <controls:CellControl x:Name="boardCell22" Grid.Row="7" Grid.Column="12" Background="Blue"/>
+            <controls:CellControl x:Name="boardCellBlue4" Grid.Row="8" Grid.Column="12" Background="Blue"/>
+            <controls:CellControl x:Name="boardCell12" Grid.Row="9" Grid.Column="12"/>
+
+            <controls:CellControl x:Name="boardCell21" Grid.Row="7" Grid.Column="13"/>
+            <controls:CellControl x:Name="boardCellBlue3" Grid.Row="8" Grid.Column="13" Background="Blue"/>
+            <controls:CellControl x:Name="boardCell13" Grid.Row="9" Grid.Column="13"/>
+
+            <controls:CellControl x:Name="boardCell20" Grid.Row="7" Grid.Column="14"/>
+            <controls:CellControl x:Name="boardCellBlue2" Grid.Row="8" Grid.Column="14" Background="Blue"/>
+            <controls:CellControl x:Name="boardCell14" Grid.Row="9" Grid.Column="14"/>
+
+            <controls:CellControl x:Name="boardCell19" Grid.Row="7" Grid.Column="15"/>
+            <controls:CellControl x:Name="boardCellBlue1" Grid.Row="8" Grid.Column="15" Background="Blue"/>
+            <controls:CellControl x:Name="boardCell15" Grid.Row="9" Grid.Column="15"/>
+
+            <controls:CellControl x:Name="boardCell18" Grid.Row="7" Grid.Column="16"/>
+            <controls:CellControl x:Name="boardCell17" Grid.Row="8" Grid.Column="16" Background="Blue" />
+            <controls:CellControl x:Name="boardCell16" Grid.Row="9" Grid.Column="16"/>
+
+            <!-- Blue Finish -->
+            <controls:CellControl x:Name="boardCellBlue7" Grid.Row="8" Grid.Column="9" HorizontalAlignment="Right" Background="Blue" Width="{StaticResource cellHeight}"/>
+            <controls:CellControl x:Name="boardCellBlue8" Grid.Row="8" Grid.Column="9" HorizontalAlignment="Left" Background="Blue" Width="{StaticResource cellHeight}"/>
+
+            <!-- Blue/Red Cross -->
+            <Polygon Points="{StaticResource triangleBlueTwo}" Stroke="Blue" Fill="Blue" Grid.Row="7" Grid.Column="9"/>
+            <Polygon Points="{StaticResource triangleRedTwo}" Stroke="Red" Fill="Red" Grid.Row="7" Grid.Column="9"/>
+            <Polygon Points="{StaticResource diagonalAsc}" Stroke="Black" Fill="Transparent" Grid.Row="7" Grid.Column="9"/>
+
+            <controls:CellControl x:Name="boardCell25" Grid.Row="7" Grid.Column="9" VerticalAlignment="Bottom" BorderThickness="0"/>
+            <controls:CellControl x:Name="boardCell26" Grid.Row="7" Grid.Column="9" VerticalAlignment="Top" BorderThickness="0"/>
+
+            <!-- Board Center -->
+            <!--<Polygon Grid.Row="8" Grid.Column="8"
+            Points="0,0 100,0, 50,50" Stroke="Transparent" Fill="Red" />
+        <Polygon Grid.Row="8" Grid.Column="8"
+            Points="0,0 50,50, 0,100" Stroke="Transparent" Fill="Green" />
+        <Polygon Grid.Row="8" Grid.Column="8"
+            Points="100,0 50,50, 100,100" Stroke="Transparent" Fill="Blue" />
+        <Polygon Grid.Row="8" Grid.Column="8"
+            Points="0,100 50,50, 100,100" Stroke="Transparent" Fill="Yellow" />-->
+            <!--<Polygon Grid.Row="7" Grid.Column="7" Grid.ColumnSpan="3" Grid.RowSpan="3"
+            Points="50,50 250,50 250,250 50,250" Stroke="Black" />-->
+
+            <Button Grid.Row="8" Grid.Column="8" Height="30" Width="30" Content="X"
+                x:Name="diceCentral" Click="BtnRollDice_Click"/>
+
+        </Grid>
+
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="1" Margin="50 0 0 0">
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0 0 5 0" FontSize="20">Last Turn:</TextBlock>
+                    <TextBlock x:Name="txtCurrentPlayer" FontSize="20" Text="-" Margin="0 0 10 0"/>
+                    <Image x:Name="imgDice1" Source="Images/dice1.jpg" Width="20" Margin="0" Visibility="Collapsed"/>
+                    <Image x:Name="imgDice2" Source="Images/dice2.jpg" Width="20" Margin="0" Visibility="Collapsed"/>
+                    <Image x:Name="imgDice3" Source="Images/dice3.jpg" Width="20" Margin="0" Visibility="Collapsed"/>
+                    <Image x:Name="imgDice4" Source="Images/dice4.jpg" Width="20" Margin="0" Visibility="Collapsed"/>
+                    <Image x:Name="imgDice5" Source="Images/dice5.jpg" Width="20" Margin="0" Visibility="Collapsed"/>
+                    <Image x:Name="imgDice6" Source="Images/dice6.jpg" Width="20" Margin="0" Visibility="Collapsed"/>
+                    
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0 0 5 0" FontSize="20">Next Turn:</TextBlock>
+                    <TextBlock x:Name="txtNextPlayer" FontSize="20" Text="-" Margin="0 0 10 0"/>
+                </StackPanel>
+                <!--<StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0 0 5 0">Roll Dice:</TextBlock>
+                    <TextBlock x:Name="txtDiceRolled" />
+                </StackPanel>-->
+
+            </StackPanel>
+            <ListBox Grid.Row="1" Margin="50 10"
+                     x:Name="txtDisplayInfo" />
+
+        </Grid>
+
+    </Grid>
+</Window>

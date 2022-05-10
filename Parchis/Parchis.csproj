@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\dice1.jpg" />
+    <None Remove="Images\dice2.jpg" />
+    <None Remove="Images\dice3.jpg" />
+    <None Remove="Images\dice4.jpg" />
+    <None Remove="Images\dice5.jpg" />
+    <None Remove="Images\dice6.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\dice1.jpg" />
+    <Resource Include="Images\dice2.jpg" />
+    <Resource Include="Images\dice3.jpg" />
+    <Resource Include="Images\dice4.jpg" />
+    <Resource Include="Images\dice5.jpg" />
+    <Resource Include="Images\dice6.jpg" />
+  </ItemGroup>
+
+</Project>
