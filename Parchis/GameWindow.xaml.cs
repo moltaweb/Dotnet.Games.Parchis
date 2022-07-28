@@ -266,7 +266,7 @@ namespace Parchis
 
         private void LoadBoard(GameData data)
         {
-            CreateBoard();            
+            UICreateBoard();            
 
             // add Chips to the UI
             foreach (var player in data.Players)
@@ -364,7 +364,7 @@ namespace Parchis
             }
         }
 
-        private void CreateBoard()
+        private void UICreateBoard()
         {
             _board = new List<CellControl>();
 
